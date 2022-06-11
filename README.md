@@ -28,6 +28,7 @@ https://codesoapbox.dev/keycloak-user-migration
 | 11.x             | [9f59cdf7fa888c31c5cda3d1fe014c9a0682ab30](https://github.com/daniel-frak/keycloak-user-migration/tree/9f59cdf7fa888c31c5cda3d1fe014c9a0682ab30)   |
 | 9.X              | [c9c64162b91cedc29d8bf360c3df50b69fdb4c6b](https://github.com/daniel-frak/keycloak-user-migration/tree/c9c64162b91cedc29d8bf360c3df50b69fdb4c6b)   |
 
+
 ## Prerequisites - REST endpoints in the legacy system
 
 You must provide two REST endpoints (GET and POST) in your legacy authentication system under the
@@ -276,3 +277,14 @@ automatically map legacy groups to Keycloak groups, by specifying the mapping in
 
 This switch can be toggled to decide whether groups which are not defined in the legacy group conversion map should be
 migrated anyway or simply ignored.
+
+### Import Users from Firebase Auth
+
+1. Go in Keycloak AdminConsole to Authentication > Password Policy > Add hashing algorithm (drop-down) > Add value ```firebase-scrypt``` (from https://github.com/SmartMoveSystems/keycloak-firebase-scrypt)
+
+2. Import users with firebase-keycloak-importer-1.0.1.jar (from https://github.com/SmartMoveSystems/firebase-keycloak-importer)
+
+
+### Deploy Apple as Identity Provider
+
+```docker cp additional-identity-providers/apple-social-identity-provider-1.0.2.jar <CONTAINER-ID>:/opt/keycloak/providers``` (from https://github.com/BenjaminFavre/keycloak-apple-social-identity-provider)
